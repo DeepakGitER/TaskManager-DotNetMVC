@@ -7,7 +7,7 @@ namespace TaskManager.Service
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ApplicationDbContext _context; // your DbContext
+        private readonly ApplicationDbContext _context; 
 
         public CategoryService(ApplicationDbContext context)
         {

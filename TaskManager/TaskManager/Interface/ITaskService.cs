@@ -4,7 +4,6 @@ namespace TaskManager.Interface
 {
     public interface ITaskService
     {
-        //Task<TaskManager.Models.Task> CreateTaskAsync(Models.Task task);
         Task<TaskManager.Models.Task> CreateTaskAsync(TaskDto taskDto);
         Task<IEnumerable<TaskManager.Models.Task>> GetTasksAsync();
         Task<TaskManager.Models.Task> GetTaskByIdAsync(int id);

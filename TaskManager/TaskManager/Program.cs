@@ -53,9 +53,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Authentication middleware
-app.UseAuthorization(); // Authorization middleware
-app.UseSession(); // Session middleware (Make sure this is added!)
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseSession(); 
 
 app.MapControllerRoute(
     name: "default",

@@ -54,10 +54,9 @@ namespace TaskManager.Controllers
             var task = await _taskService.GetTaskByIdAsync(id);
             if (task == null) return NotFound();
 
-            // Convert 'Models.Task' to 'TaskDto' including TaskId
             var taskDto = new TaskDto
             {
-                TaskId = task.TaskId, // Ensure TaskId is set
+                TaskId = task.TaskId, 
                 Title = task.Title,
                 Description = task.Description,
                 Priority = Enum.TryParse<Priority>(task.Priority, out var priority) ? priority : (Priority?)null,
@@ -83,19 +82,17 @@ namespace TaskManager.Controllers
                 if (task == null)
                     return NotFound();
 
-                // Correctly mapping TaskDto properties to Task model
                 task.Title = taskDto.Title;
-                task.Description = taskDto.Description; // Fixed: Assigning the value
-                task.UserId = taskDto.UserId; // Fixed: Assigning the value
-                task.Priority = taskDto.Priority.HasValue ? taskDto.Priority.Value.ToString() : null; // Convert enum to string
-                task.CategoryId = taskDto.CategoryId; // Fixed: Assigning the value
-                task.UpdatedAt = DateTime.UtcNow; // Set timestamp
+                task.Description = taskDto.Description;
+                task.UserId = taskDto.UserId;
+                task.Priority = taskDto.Priority.HasValue ? taskDto.Priority.Value.ToString() : null; 
+                task.CategoryId = taskDto.CategoryId;
+                task.UpdatedAt = DateTime.UtcNow;
 
                 await _taskService.UpdateTaskAsync(task);
                 return RedirectToAction(nameof(Index));
             }
 
-            // If validation fails, reload dropdown lists
             taskDto = await PopulateTaskDtoAsync(taskDto);
             return View(taskDto);
         }
@@ -137,7 +134,7 @@ namespace TaskManager.Controllers
             return taskDto;
         }
 
-        [Authorize] // Requires authentication to access
+        [Authorize] 
         [HttpGet("tasks")]
         public async Task<IActionResult> GetTasks()
         {

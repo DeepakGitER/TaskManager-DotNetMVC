@@ -42,7 +42,6 @@ namespace TaskManager.Service
 
         public async Task<TaskManager.Models.Task> CreateTaskAsync(TaskDto taskDto)
         {
-            // Convert UserIds and CategoryIds to entities (e.g., User and Category)
             var user = _context.Users.Where(u => u.UserId == taskDto.UserId);
             var category = _context.Categories.Where(cat => cat.CategoryId == taskDto.CategoryId);
 
@@ -55,7 +54,6 @@ namespace TaskManager.Service
                 CategoryId = taskDto.CategoryId
             };
 
-            // Save the task in the database
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
 

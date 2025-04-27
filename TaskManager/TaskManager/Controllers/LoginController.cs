@@ -16,14 +16,14 @@ public class LoginController : Controller
         _loginService = loginService;
     }
 
-    // GET: Login
+    // GET
     public async Task<IActionResult> Index()
     {
         var users = await _loginService.GetAllUsersAsync();
         return View(users);
     }
 
-    // GET: Login/Details/5
+ 
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -36,13 +36,13 @@ public class LoginController : Controller
         return View(user);
     }
 
-    // GET: Login/Create
+    // GET
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: Login/Create
+    // POST
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Username,PasswordHash")] User user)
@@ -59,7 +59,7 @@ public class LoginController : Controller
         return View(user);
     }
 
-    // GET: Login/Edit/5
+    // GET
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -72,7 +72,6 @@ public class LoginController : Controller
         return View(user);
     }
 
-    // POST: Login/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, [Bind("UserId,Username,PasswordHash,CreatedAt")] User user)
@@ -92,7 +91,7 @@ public class LoginController : Controller
         return View(user);
     }
 
-    // GET: Login/Delete/5
+    // GET
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -105,7 +104,6 @@ public class LoginController : Controller
         return View(user);
     }
 
-    // POST: Login/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
@@ -123,28 +121,6 @@ public class LoginController : Controller
         return View();
     }
 
-    //[HttpPost]
-    //[ValidateAntiForgeryToken]
-    //public async Task<IActionResult> ValidateUser(LoginDto model)
-    //{
-    //    if (ModelState.IsValid)
-    //    {
-    //        var user = await _loginService.ValidateUserAsync(model.Username, model.Password);
-
-    //        if (user != null)
-    //        {
-    //            // Success - Redirect to Home/Index
-    //            return RedirectToAction("Index", "Home");
-    //        }
-    //        else
-    //        {
-    //            // Invalid credentials
-    //            ModelState.AddModelError(string.Empty, "Invalid username or password.");
-    //        }
-    //    }
-
-    //    return View(model);
-    //}
 
     [HttpPost]
     public async Task<IActionResult> ValidateUser(LoginDto loginDto)
