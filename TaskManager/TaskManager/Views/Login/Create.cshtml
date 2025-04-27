@@ -1,0 +1,86 @@
+﻿@model TaskManager.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    /* Video background setup */
+    .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1; /* Puts video behind all content */
+    }
+
+        .video-background video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover; /* Ensures video fully covers the screen */
+        }
+
+    /* Form container styling */
+    .form-container {
+        position: relative;
+        z-index: 1; /* Ensures form appears above video */
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+    }
+
+        .form-container h1 {
+            text-align: center;
+        }
+</style>
+
+<!-- Video Background -->
+<div class="video-background">
+    <video autoplay loop muted>
+        <source src="~/WhatsApp Video 2025-04-27 at 1.40.06 AM.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Form Container -->
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="form-container">
+        <h1>Create User</h1>
+        <hr />
+
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="PasswordHash" class="control-label"></label>
+                <input asp-for="PasswordHash" class="form-control" type="password" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="btn btn-link">Back to List</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

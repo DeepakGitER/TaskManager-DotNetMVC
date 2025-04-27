@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TaskManager.Models.Task>
+
+@{
+    ViewData["Title"] = "Task List";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a class="btn btn-primary" asp-controller="Task" asp-action="Create">Create New Task</a>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Title</td>
+                <td>@task.Priority</td>
+                <td>@(task.IsCompleted == true ? "Completed" : "Pending")</td>
+                <td>@task.Category?.Name</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-controller="Task" asp-action="Edit" asp-route-id="@task.TaskId">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="Task" asp-action="Delete" asp-route-id="@task.TaskId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
